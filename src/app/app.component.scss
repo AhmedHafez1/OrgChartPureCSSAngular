@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+$bottom-margin: 50px;
+$line-width: 2px;
+$line-color: rgba(rgb(73, 50, 50), 0.7);
+$bg-color: #e2efee;
+
+html {
+
+// text-rendering: optimizeLegibility !important;
+// -webkit-font-smoothing: antialiased !important;
+}
+
+h2{
+  text-align: center;
+  color: #501818;
+  margin: 50px;
+  i{
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+  }
+}
+
+hr{
+  margin: 50px 0;
+  border: none;
+  height: 1px;
+  background-color: $bg-color;
+}
+
+body{
+  background: $bg-color;
+  font-family: 'Poppins', sans-serif;
+}
+
+p{
+  margin: 0;
+  background-color: #fff;
+  color: #54b2de;
+  padding: 30px;
+  border-radius: 7px;
+  min-width: 70px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(#CC8367, 0.22);
+}
+
+.hv-wrapper{
+  display: flex;
+  .hv-item{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    .hv-item-parent{
+      margin-bottom: $bottom-margin;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      p{
+        font-weight: bold;
+        color: #DE5454;
+      }
+      &:after{
+        position: absolute;
+        content: '';
+        width: $line-width;
+        height: $bottom-margin / 2;
+        bottom: 0;
+        left: 50%;
+        background-color: $line-color;
+        transform: translateY(100%);
+      }
+    }
+    .hv-item-children{
+      display: flex;
+      justify-content: center;
+      .hv-item-child{
+        padding: 0 15px;
+        position: relative;
+
+        &:only-child:after{
+            display: none;
+        }
+
+        &:before, &:after{
+          content: '';
+          position: absolute;
+          background-color: $line-color;
+          left: 0;
+        }
+
+        &:before{
+          left: 50%;
+          top: 0;
+          transform: translateY(-100%);
+          width: $line-width;
+          height: $bottom-margin / 2;
+        }
+
+        &:after{
+          top: -$bottom-margin / 2;
+          transform: translateY(-100%);
+          height: $line-width;
+          width: 100%;
+        }
+
+        &:first-child:after{
+          left: 50%;
+          width: 50%;
+        }
+
+        &:last-child:after{
+          width: calc(50% + 1px);
+        }
+
+      }
+    }
+  }
+
+  // Reverse View
+  // Flexbox makes the magic here. We just reverse flex-direction
+  // and move the linse to the opposite side. That`s it
+  &.reverse{
+    .hv-item{
+      flex-direction: column-reverse;
+      .hv-item-parent{
+        margin-top: $bottom-margin;
+        margin-bottom: 0;
+          &:after{
+            top: 0;
+            transform: translateY(-100%);
+          }
+      }
+      .hv-item-child{
+        display: flex;
+        align-items: flex-end;
+        &:before{
+          top: auto;
+          bottom: 0;
+          transform: translateY(100%);
+        }
+
+        &:after{
+          top: auto;
+          bottom: -$bottom-margin / 2;
+          transform: translateY(100%);
+        }
+      }
+    }
+  }
+}
